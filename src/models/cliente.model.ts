@@ -1,5 +1,6 @@
 //Modelado de los datos de la tabla de cliente
-export interface Cliente{
+export interface ICliente{
+    id:number;
     nombre: string;
     correo: string;
     telefono: string;
