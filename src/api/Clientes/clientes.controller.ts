@@ -1,5 +1,6 @@
+import { Cliente } from './../../entities/cliente.entity';
 //Los controladores son responsables de manejar las solicitudes entrantes y devolver las respuestas al cliente.
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller,Param, Post, Get } from '@nestjs/common';
 import { ICliente } from './../../models/cliente.model';
 import { ClienteService } from './clientes.service';
 
@@ -14,7 +15,7 @@ export class ClienteController {
             return "El cliente ya existe"
         }
         try {
-            this.clientService.create(params)
+            this.clientService.createCliente(params)
             return true
         } catch (error) {
             console.log({error})
@@ -22,7 +23,13 @@ export class ClienteController {
     }
 
     @Get('/all')//Esta accion devuelve todos los clientes
-    getClient(){
+    getCliente(){
         return this.clientService.getAll()
+    }
+
+    @Get('/:id')
+    getClientById(@Param('id') param){
+        const client = this.clientService.getClienteById(param)
+        return client ? client : "El cliente no existe" //operacion ternaria -> primer parametro se evalua a (verdadero) ?(si) :(else)
     }
 }

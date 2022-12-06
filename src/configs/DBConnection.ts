@@ -12,4 +12,12 @@ export const Connection = TypeOrmModule.forRoot({
     database: 'proyecto_final',
     entities: [Cliente,Consumo,Pago],//aqui se llaman las entidades-> hace referencia a una tabla  
     synchronize: true
+    /*type: 'mysql',
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT), //funcion number reservada para convertir el valor a numero
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    entities: [Cliente,Consumo,Pago],//aqui se llaman las entidades 
+    synchronize: true*/
 })
