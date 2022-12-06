@@ -14,7 +14,6 @@ export class ClienteService {
         //El Servicio se inyecta a traves del constructor de clases. 
         @InjectRepository(Cliente) private clientEntity : Repository<Cliente>
     ){}
-    private readonly Clientes : Cliente[] = []; 
 
     async createCliente(cliente: ICliente){
         return await this.clientEntity.save(cliente)
@@ -24,13 +23,19 @@ export class ClienteService {
         return this.clientEntity.find();
     } 
 
+    private readonly Clientes : Cliente[] = []; 
     clienteExists(id: number):boolean{
         const index = this.Clientes.findIndex((Cliente) => Cliente.id === id)
         return index !== -1
     }
 
     async getClienteById(id: number):Promise<Cliente>{
-        return await this.clientEntity.findOne( {where : {id:id}})
+        return await this.clientEntity.findOne( {
+            where : 
+            {
+                id:id
+            }
+        })
     }
 
     getReporteCliente(){
