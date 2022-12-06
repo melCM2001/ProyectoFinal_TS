@@ -37,7 +37,7 @@ export class PagoService {
         })
     }
 
-    getReporteNoPagado(){
+    getReporteNoPagado(){ 
         return this.pagoEntity.find({
             where:
             {

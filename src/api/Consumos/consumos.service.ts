@@ -18,8 +18,8 @@ export class ConsumoService {
     async createConsumo(consumo: IConsumo){
         const date = new Date();
         const pago = consumo.pagado;
-        //const fecha = new Date((await this.clienteService.getClienteById(consumo.id_cliente)).fecha_nacimiento)
-        //let edad = this.getEdad(fecha)
+        const fecha = new Date((await this.clienteService.getClienteById(consumo.id_cliente)).fecha_nacimiento)
+        let edad = this.getEdad(fecha)
         //se calcula el total del pago
         let total_pago = 0
         //Los rangos de costo por consumo son: 1 a 100Kw el costo por KW es de 150, 101 a 300 es de 170 de 300 en adelante 190.
@@ -35,9 +35,9 @@ export class ConsumoService {
                     total_pago = consumo.consumo * 190
             }
         }
-        /*if(await edad > 50){
+        if(edad > 50){
             total_pago = total_pago - (total_pago * .10)
-        }*/
+        }
         }
         //se hace la inserción
         const response =  await this.consumoEntity.save({
@@ -80,7 +80,7 @@ export class ConsumoService {
             
     }
 
-    async getEdad(fecha : Date) {
+    getEdad(fecha : Date) {
         let hoy = new Date()
         let fechaNacimiento = new Date(fecha)
         let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
