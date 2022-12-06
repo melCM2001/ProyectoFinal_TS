@@ -1,0 +1,30 @@
+## archivo de configuracion normalmente utilizada para automatizaciones
+services:
+  app:
+    container_name: app 
+    build: ## construir modo de desarrollo
+      context: .
+      target: development 
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3001:3000" ##hostport:containerport  Externo:Interno
+    command: npm run start:docker
+    env_file:
+      - .env ##lo que quiero que se lea
+    networks:
+      - webnet ##nombre sobre donde estara corriendo
+
+  db:
+    image: mysql
+    restart: always
+    enviroment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '${DB_PORT}:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
