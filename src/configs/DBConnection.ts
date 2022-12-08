@@ -4,7 +4,7 @@ import { Consumo } from "src/entities/consumo.entity";
 import { Pago} from 'src/entities/pago.entity';
 
 export const Connection = TypeOrmModule.forRoot({
-    /*type: 'mysql',
+   /* type: 'mysql',
     host: 'localhost',
     port: 3306, //funcion number reservada para convertir el valor a numero
     username: 'root',

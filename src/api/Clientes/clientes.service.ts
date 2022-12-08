@@ -17,13 +17,13 @@ export class ClienteService {
 
     async createCliente(cliente: ICliente){
         return await this.clientEntity.save(cliente)
-    }
+    } 
 
     getAll(){
         return this.clientEntity.find();
     } 
 
-    private readonly Clientes : Cliente[] = []; 
+    private readonly Clientes : ICliente[] = []; 
     clienteExists(id: number):boolean{
         const index = this.Clientes.findIndex((Cliente) => Cliente.id === id)
         return index !== -1
@@ -31,6 +31,11 @@ export class ClienteService {
 
     async getClienteById(id: number):Promise<Cliente>{
         return await this.clientEntity.findOne( {
+            relations: {
+                consumo: {
+                    pago: true
+                },
+            },
             where : 
             {
                 id:id

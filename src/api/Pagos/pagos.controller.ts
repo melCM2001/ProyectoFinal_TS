@@ -10,14 +10,4 @@ export class PagoController {
     getClientPago(){
         return this.pagoService.getAll()
     }
-
-    @Get('/ReportePagado')
-    getClientPagado(){
-        return this.pagoService.getReportePagado()
-    }
-
-    @Get('/ReporteNoPagado')
-    getClientNoPagado(){
-        return this.pagoService.getReporteNoPagado()
-    }
 }
