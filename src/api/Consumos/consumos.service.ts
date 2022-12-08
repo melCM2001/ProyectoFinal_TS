@@ -1,3 +1,4 @@
+import { Cliente } from 'src/entities/cliente.entity';
 import { ClienteService } from './../Clientes/clientes.service';
 import { Consumo } from './../../entities/consumo.entity';
 import { PagoService } from './../Pagos/pagos.service';
@@ -58,6 +59,10 @@ export class ConsumoService {
     //Se debe obtener un reporte el cual indique que usuario consumio mas Kw y quien consumio menos Kw.
     getMinimoConsumo(){
         return this.consumoEntity.find({
+            relations: {
+                id_Cliente : true,
+                pago : true
+            },
             order: {
                 consumo: "ASC",
             },
@@ -67,6 +72,10 @@ export class ConsumoService {
     }
     getMaximoConsumo(){
         return this.consumoEntity.find({
+            relations: {
+                id_Cliente : true,
+                pago : true
+            },
             order: {
                 consumo: "DESC",
             },
@@ -77,7 +86,40 @@ export class ConsumoService {
     // Se debe obtener un reporte de detalles de consumo por cliente.
     getReporteCliente(){
         return this.clienteService.getReporteCliente()
-            
+    }
+    getReporteClienteId(id : number){
+        return this.clienteService.getClienteById(id)
+    }
+    
+    //Se debe obtener un reporte de los clientes que ya pagaron y los que aun deben.
+    getReportePagado(){
+        return this.consumoEntity.find({
+            relations: {
+                id_Cliente : true,
+                pago : true
+            },
+            where:
+            {
+                pago : {
+                    pagado : true
+                }
+            }
+        })
+    }
+
+    getReporteNoPagado(){
+        return this.consumoEntity.find({
+            relations: {
+                id_Cliente : true,
+                pago : true
+            },
+            where:
+            {
+                pago : {
+                    pagado : false
+                }
+            }
+        })
     }
 
     getEdad(fecha : Date) {

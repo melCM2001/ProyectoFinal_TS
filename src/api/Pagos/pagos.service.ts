@@ -27,22 +27,4 @@ export class PagoService {
         return this.pagoEntity.find()
     }
 
-    //Se debe obtener un reporte de los clientes que ya pagaron y los que aun deben.
-    getReportePagado(){
-        return this.pagoEntity.find({
-            where:
-            {
-                pagado: true
-            }
-        })
-    }
-
-    getReporteNoPagado(){ 
-        return this.pagoEntity.find({
-            where:
-            {
-                pagado: false
-            }
-        })
-    }
 }
