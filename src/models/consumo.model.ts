@@ -1,13 +1,14 @@
+import { IsBoolean, IsNumber } from 'class-validator';
 //Modelado de los datos de la tabla de consumo
 import { IPago } from './pago.model';
-import { IsString, IsInt, IsNumberString, IsDateString, IsEmail,  IsBoolean} from 'class-validator';
+import { IsString, IsInt, IsNumberString, IsDateString, IsEmail,  } from 'class-validator';
 
-export interface IConsumo{
+export class IConsumo{
     //no es necesario especificar id
-    @IsInt()
+    @IsNumber()
     consumo: number;
 
-    @IsInt()
+    @IsNumber()
     id_cliente: number;
 
     @IsBoolean()
